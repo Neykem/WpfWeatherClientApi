@@ -9,13 +9,12 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-
+                <ResourceDictionary Source="Style/Assets/DictionaryButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:MainViewModel}">
                 <view:MainView/>
             </DataTemplate>
-            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

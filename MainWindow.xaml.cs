@@ -22,5 +22,23 @@ namespace WpfWeatherClientApi
             var a = await wearherDayRepository.GetWeatherInCityForToday("London");
             
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void Window_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }
