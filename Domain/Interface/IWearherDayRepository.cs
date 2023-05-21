@@ -8,6 +8,6 @@ namespace WpfWeatherClientApi.Domain.Interface
     interface IWearherDayRepository
     {
         Task<WeatherDay> GetWeatherInCityForToday(string cityName);
-        WeatherDay GetWeatherDayForDate(DateTime dateTime);
+        string GetSourseImageForWeather(string descriptionWeather);
     }
 }

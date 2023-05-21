@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Dynamic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using CommunityToolkit.Mvvm.Input;
 
 using WpfWeatherClientApi.Domain;
@@ -22,7 +25,9 @@ namespace WpfWeatherClientApi.ViewModel
         private string _windSpeed;
         private string _sourseImageWither;
         private string _textSearch;
+        private string _messageError;
         private object _currentView;
+        
         public object CurrentView
         {
             get { return _currentView; }
@@ -36,16 +41,19 @@ namespace WpfWeatherClientApi.ViewModel
         public string Tempirature { get => _tempirature; set { _tempirature = value; OnPropertyChanged(); } }
         public string LocationCode { get => _locationCode; set { _locationCode = value; OnPropertyChanged(); } }
         public string SourseImageWither { get => _sourseImageWither; set { _sourseImageWither = value; OnPropertyChanged(); } }
-        #endregion 
+        public string MessageError { get => _messageError; set { _messageError = value; OnPropertyChanged(); } }
+        #endregion
         public MainViewModel()
         {
-            CurrentView = this;
-            ApiKey = "61ec2e2f7bc340da9d70fde7ce39d17d";
-            TextSearch = "London";
-            SourseImageWither = "/Style/Image/2.png";
-
-            ReloadedViewCommand = new AsyncRelayCommand(CallCommandRellay);
-
+            try
+            {
+                SetDefaultData();
+                ReloadedViewCommand = new AsyncRelayCommand(CallCommandRellay);
+            }
+            catch(Exception ex)
+            {
+                SetDefaultDataForExeption(ex);
+            }
         }
         //Асинхронный вызов для команды и заполнение свойств ноывми данными
         private async Task<WeatherDay> CallCommandRellay()
@@ -56,10 +64,33 @@ namespace WpfWeatherClientApi.ViewModel
             Tempirature = (result.Main.Temp - 273).ToString("00") + '\u2103';
             CityName = result.Name;
             LocationCode = result.Coord.Lon.ToString() + " " + result.Coord.Lat.ToString();
-            WindSpeed = result.Wind.Speed.ToString("00.0");
-            Description = result.Weather.FirstOrDefault().Description;
-
+            WindSpeed = "Скорость ветра: " + result.Wind.Speed.ToString("00.0")+ " м/с";
+            Description = result.Weather.FirstOrDefault().Description.ToUpper();
+            SourseImageWither = wearherDayRepository.GetSourseImageForWeather(result.Weather.FirstOrDefault().Description.ToLower());
             return result;
+        }
+        //Установка данных по умолчанию
+        private void SetDefaultData()
+        {
+            CurrentView = this;
+            ApiKey = "61ec2e2f7bc340da9d70fde7ce39d17d";
+            TextSearch = "Kazan";
+            Tempirature = "00" + '\u2103';
+            CityName = "---";
+            LocationCode = "Введите город!";
+            WindSpeed = "Скорость ветра: " + "0.0" + " м/с";
+            Description = "Нет данных!";
+            SourseImageWither = "/Style/Image/3.png";
+        }
+        private void SetDefaultDataForExeption(Exception exception)
+        {
+            MessageError = "Произошла ошибка:\n" + exception.Message.ToString();
+            Tempirature = "";
+            CityName = "";
+            WindSpeed = "";
+            Description = "";
+            SourseImageWither = "";
+            LocationCode = "";
         }
     }
 }

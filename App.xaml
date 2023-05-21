@@ -4,17 +4,15 @@
              xmlns:local="clr-namespace:WpfWeatherClientApi" 
              xmlns:viewModel="clr-namespace:WpfWeatherClientApi.ViewModel"
              xmlns:view="clr-namespace:WpfWeatherClientApi.View"
-             StartupUri="MainWindow.xaml">
+             StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/Assets/DictionaryButton.xaml"/>
+                <ResourceDictionary Source="Style/Assets/DictionaryColor.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:MainViewModel}">
-                <view:MainView/>
-            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

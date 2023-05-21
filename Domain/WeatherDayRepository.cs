@@ -14,15 +14,11 @@ namespace WpfWeatherClientApi.Domain
     {
         private readonly HttpClient httpClient;
         private string _apiKey { get; set; }
+
         public WeatherDayRepository(string apiKey)
         {
             httpClient = new HttpClient();
             _apiKey = apiKey;
-        }
-
-        public WeatherDay GetWeatherDayForDate(DateTime dateTime)
-        {
-            throw new NotImplementedException();
         }
 
         async public Task<WeatherDay> GetWeatherInCityForToday(string cityName)
@@ -42,7 +38,21 @@ namespace WpfWeatherClientApi.Domain
             {
                 throw new Exception($"Ошибка загрузки данных! Код ошибки: {response.StatusCode}");
             }
-            throw new NotImplementedException();
+        }
+
+        public string GetSourseImageForWeather(string descriptionWeather)
+        {
+            switch (descriptionWeather)
+            {
+                case "облачно" or "пасмурно":
+                    return "/Style/Image/2.png";
+                case "солнечно":
+                    return "/Style/Image/1.png";
+                case "дождь" or "местами дождь":
+                    return "/Style/Image/4.png";
+                default:
+                    return "/Style/Image/3.png";
+            }
         }
     }
 }
