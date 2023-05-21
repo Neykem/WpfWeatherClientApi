@@ -27,7 +27,7 @@ namespace WpfWeatherClientApi.Domain
 
         async public Task<WeatherDay> GetWeatherInCityForToday(string cityName)
         {
-            string req = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + _apiKey;
+            string req = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + _apiKey + "&lang=ru";
             HttpResponseMessage response = await httpClient.GetAsync(req);
             if (response.IsSuccessStatusCode)
             {
