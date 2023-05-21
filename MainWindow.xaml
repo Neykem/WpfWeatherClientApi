@@ -28,7 +28,7 @@
                 <GradientStop Color="#FF2D76BA" Offset="1"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
-        <Border Background="#282F35" Margin="10,34,10,10"
+        <Border Background="#282F35" Margin="10,34,9,35"
                 CornerRadius="10">
             <Grid>
                 <Grid x:Uid="MainHeader" Margin="0,-28,0,0" Height="23" VerticalAlignment="Top">
@@ -66,7 +66,8 @@
                                 <Button Command="{Binding ReloadedViewCommand}" Content="&gt;" Margin="118,-1,-1,-1" Background="#FF530ABB" BorderBrush="{x:Null}" FontSize="7" FontWeight="UltraBold" Foreground="White" Template="{DynamicResource ButtonControlTemplateSR_1}" Style="{DynamicResource MyButtonStyle}"/>
                             </Grid>
                         </Border>
-                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Height="16" Text="Введите город:" FontWeight="Light" Foreground="White" Margin="0,0,144,0"/>
+
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Height="16" Text="{Binding CityName}" FontWeight="Light" Foreground="White" Margin="0,0,144,0"/>
                     </Grid>
                 </Grid>
                 <Grid x:Uid="MainBodyContent">
@@ -75,12 +76,30 @@
                         <ColumnDefinition Width="299*"/>
                         <ColumnDefinition Width="21*"/>
                     </Grid.ColumnDefinitions>
-                    <ContentControl
-                                Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center" 
-                                Height="552" Width="420"
-                                Content="{Binding CurrentView}"/>
+                    <Grid Grid.ColumnSpan="3">
+                        <Image Height="251" Source="{Binding SourseImageWither}" Margin="10,67,10,0" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{Binding CityName}" VerticalAlignment="Top" Width="420" Height="56" Foreground="White" FontSize="48" TextAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,250,0,0" TextWrapping="Wrap" Text="{Binding Tempirature}" VerticalAlignment="Top" Width="420" Height="158" Foreground="White" FontSize="124" TextAlignment="Center" FontWeight="Bold"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,398,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="420" Height="70" Foreground="White" FontSize="36" TextAlignment="Center" FontWeight="Light"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,444,0,0" TextWrapping="Wrap" Text="{Binding WindSpeed}" VerticalAlignment="Top" Width="420" Height="51" Foreground="White" FontSize="36" TextAlignment="Center" FontWeight="Light"/>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,74,0,0" TextWrapping="Wrap" Text="{Binding LocationCode}" VerticalAlignment="Top" Width="420" Height="33" Foreground="White" FontSize="20" TextAlignment="Center" FontWeight="Light"/>
+                    </Grid>
+                </Grid>
+                <Grid x:Uid="MainFooter" Margin="0,517,0,-35">
+                    <Grid Height="20" VerticalAlignment="Center" Margin="0,0,27,0">
+                        <Border Margin="85,0,-27,0" BorderThickness="1,1,1,1" CornerRadius="4,4,4,4">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF7053D1" Offset="0.003"/>
+                                    <GradientStop Color="#FF4115D9" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Grid>
+                                <TextBox TextWrapping="Wrap" Text="{Binding ApiKey}" Background="#4C000000" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="#FF5E47D7" TextChanged="TextBox_TextChanged" SelectionOpacity="2" FontStyle="Italic" FontWeight="UltraBlack" SelectionTextBrush="#FF888FFF"/>
+                            </Grid>
+                        </Border>
+                        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Height="16" Text="WeatherApiKey" FontWeight="Light" Foreground="White" Margin="0,0,244,0"/>
+                    </Grid>
                 </Grid>
             </Grid>
         </Border>

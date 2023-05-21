@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace WpfWeatherClientApi.Domain
 {
-    class RelayCommand : ICommand
+    class RelayCommand2 : ICommand
     {
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
@@ -20,7 +20,7 @@ namespace WpfWeatherClientApi.Domain
             }
         }
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public RelayCommand2(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
